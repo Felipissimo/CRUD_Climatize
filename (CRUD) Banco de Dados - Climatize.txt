@@ -1,18 +1,10 @@
--- =========================================================
 -- BANCO DE DADOS - CLIMATIZE
--- TCC - Pesquisa de Clima Organizacional
--- =========================================================
 
 CREATE DATABASE IF NOT EXISTS clima_tcc
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
 USE clima_tcc;
-
-
--- =========================================================
--- TABELA: GESTORES
--- =========================================================
 
 CREATE TABLE IF NOT EXISTS gestores (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -21,11 +13,6 @@ CREATE TABLE IF NOT EXISTS gestores (
     senha_hash VARCHAR(255) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-
--- =========================================================
--- TABELA: FUNCIONARIOS
--- =========================================================
 
 CREATE TABLE IF NOT EXISTS funcionarios (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -36,20 +23,10 @@ CREATE TABLE IF NOT EXISTS funcionarios (
     cargo VARCHAR(120) NOT NULL
 );
 
-
--- =========================================================
--- TABELA: PERGUNTAS
--- =========================================================
-
 CREATE TABLE IF NOT EXISTS perguntas (
     id TINYINT UNSIGNED PRIMARY KEY,
     texto VARCHAR(255) NOT NULL
 );
-
-
--- =========================================================
--- TABELA: RESPOSTAS
--- =========================================================
 
 CREATE TABLE IF NOT EXISTS respostas (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -64,11 +41,6 @@ CREATE TABLE IF NOT EXISTS respostas (
 
     UNIQUE KEY uq_resposta_funcionario (funcionario_id)
 );
-
-
--- =========================================================
--- TABELA: RESPOSTA_ITENS
--- =========================================================
 
 CREATE TABLE IF NOT EXISTS resposta_itens (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -92,11 +64,6 @@ CREATE TABLE IF NOT EXISTS resposta_itens (
         (resposta_id, pergunta_id)
 );
 
-
--- =========================================================
--- PERGUNTAS DA PESQUISA
--- =========================================================
-
 INSERT INTO perguntas (id, texto) VALUES
 (1, 'O ambiente de trabalho é respeitoso e colaborativo'),
 (2, 'A comunicação interna é clara e eficiente'),
@@ -113,12 +80,10 @@ ON DUPLICATE KEY UPDATE
 texto = VALUES(texto);
 
 
--- =========================================================
 -- GESTOR DE TESTE
--- =========================================================
 -- E-mail: gestor@escola.com
 -- Senha: 123456
--- =========================================================
+
 
 INSERT INTO gestores (nome, email, senha_hash)
 VALUES (
@@ -130,12 +95,9 @@ VALUES (
 ON DUPLICATE KEY UPDATE
 nome = VALUES(nome);
 
-
--- =========================================================
 -- FUNCIONÁRIOS DE TESTE
--- =========================================================
 -- Senha dos três funcionários: 123456
--- =========================================================
+
 
 INSERT INTO funcionarios
 (nome, email, senha_hash, setor, cargo)
